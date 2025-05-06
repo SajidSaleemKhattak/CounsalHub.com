@@ -5,7 +5,7 @@ import Vector from "../../assets/Client/Vector.png";
 import pfp from "../../assets/Client/pfp.jpg";
 import { Link } from "react-router-dom";
 const Messages = () => {
-  let [active, setActive] = useState(false);
+  let active = "messages";
   let array_Lawyers = [
     { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
     { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
@@ -31,38 +31,52 @@ const Messages = () => {
       <div className="flex">
         {/* SIDEBAR */}
         <div className="flex flex-col w-[20%] border-r-1 border-r-neutral-200 h-screen items-center py-5 gap-1">
-          <div className="flex gap-3 items-center border-1 pr-26 pl-5 py-2 rounded-xl bg-blue-400 text-white w-4/5">
+          <Link
+            to="/categories"
+            className={`flex gap-3 items-center border-1  border-neutral-200  pr-26 pl-5 py-2 rounded-xl w-4/5 ${
+              active === "home" ? "bg-blue-400 text-white" : ""
+            }`}
+          >
             <img src={gear} className="w-5 h-5 text-white" alt="" />
             <button>Home</button>
-          </div>
-          <div
-            onClick={() => setActive(true)}
-            className="flex gap-3 items-center border-1 pr-26 pl-5 py-2 rounded-xl bg-blue-400 text-white w-4/5"
+          </Link>
+          <Link
+            to="/messages"
+            className={`flex gap-3 items-center border-1  border-neutral-200  pr-26 pl-5 py-2 rounded-xl w-4/5 ${
+              active === "messages" ? "bg-blue-400 text-white" : ""
+            }`}
           >
             <img src={gear} className="w-5 h-5" alt="" />
-            <Link to="/messages">
-              <button>Messages</button>
-            </Link>
-          </div>
+            <button>Messages</button>
+          </Link>
 
-          <div className="flex gap-3 items-center border-1 pr-26 pl-5 py-2 rounded-xl bg-blue-400 text-white w-4/5 ">
+          <Link
+            to="/appointments"
+            className={`flex gap-3 items-center border-1  border-neutral-200  pr-26 pl-5 py-2 rounded-xl w-4/5 ${
+              active === "appointments" ? "bg-blue-400 text-white" : ""
+            }`}
+          >
             <img src={gear} className="w-5 h-5" alt="" />
-            <Link to="/appointments">
-              <button>Appointments</button>
-            </Link>
-          </div>
-          <div className="flex gap-3 items-center border-1 pr-26 pl-5 py-2 rounded-xl bg-blue-400 text-white w-4/5 ">
+            <button>Appointments</button>
+          </Link>
+          <Link
+            to="/transaction"
+            className={`flex gap-3 items-center border-1  border-neutral-200  pr-26 pl-5 py-2 rounded-xl w-4/5 ${
+              active === "transaction" ? "bg-blue-400 text-white" : ""
+            }`}
+          >
             <img src={gear} className="w-5 h-5" alt="" />
-            <Link to="/transaction">
-              <button>Transactions</button>
-            </Link>
-          </div>
-          <div className="flex gap-3 items-center border-1 pr-26 pl-5 py-2 rounded-xl bg-blue-400 text-white w-4/5">
+            <button>Transactions</button>
+          </Link>
+          <Link
+            to="/profile"
+            className={`flex gap-3 items-center border-1 border-neutral-200 pr-26 pl-5 py-2 rounded-xl w-4/5 ${
+              active === "profile" ? "bg-blue-400 text-white" : ""
+            }`}
+          >
             <img src={gear} className="w-5 h-5" alt="" />
-            <Link to="/profile">
-              <button>Profile</button>
-            </Link>
-          </div>
+            <button>Profile</button>
+          </Link>
           <div className="flex flex-col justify-center items-center bg-blue-400 w-4/5 rounded-2xl px-6 py-6 text-white mt-14">
             <p className="font-semibold">Help Center</p>
             <p className="mt-2 text-[13px]">Contact us for More </p>
