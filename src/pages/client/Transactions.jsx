@@ -7,11 +7,35 @@ import { Link } from "react-router-dom";
 import Messages from "./Messages";
 const Transactions = () => {
   let active = "transaction";
-  let array_Lawyers = [
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
+  let array_transaction = [
+    {
+      img: pfp,
+      name: "Danish",
+      type: "CivilCriminal",
+      Price: "4000",
+      Timing: "16:04",
+    },
+    {
+      img: pfp,
+      name: "Danish",
+      type: "CivilCriminal",
+      Price: "4000",
+      Timing: "16:04",
+    },
+    {
+      img: pfp,
+      name: "Danish",
+      type: "CivilCriminal",
+      Price: "4000",
+      Timing: "16:04",
+    },
+    {
+      img: pfp,
+      name: "Danish",
+      type: "CivilCriminal",
+      Price: "4000",
+      Timing: "16:04",
+    },
   ];
   return (
     <div className="">
@@ -91,9 +115,60 @@ const Transactions = () => {
           </button>
         </div>
         {/* ACTION */}
-        <div className="w-[80%] px-10 py-10 flex">
-          <div className="w-2/5 bg-amber-700">sss</div>
-          <div className="w-3/5 bg-teal-400">s</div>
+        <div className="w-[80%] px-10 py-10">
+          <p className="text-2xl font-semibold">Appointments</p>
+          {/* Container Below Welcome Text */}
+          <div className="border-1 border-neutral-200 rounded-2xl py-10 px-10 mt-10">
+            {/* Type and Search Button Div  */}
+            <div className="flex justify-between mb-5">
+              <p className="text-xl">Civil Lawyers</p>
+              <input
+                className="border-1 border-neutral-200 rounded-xl px-6 py-2"
+                type="search"
+                name=""
+                placeholder="Search for Category"
+                id=""
+              />
+            </div>
+            {/* Display of list of Lwyers Div */}
+            <div className="flex gap-5 flex-col">
+              {array_transaction.map((element, index) => (
+                <div
+                  className="flex w-3/4 h-15 border-1 border-neutral-200 rounded-2xl px-5 py-7 items-center gap-1"
+                  key={index}
+                >
+                  <img
+                    className="w-12 h-12 rounded-[500px]"
+                    src={element.img}
+                    alt="lawyers Pfp"
+                    srcset=""
+                  />
+                  <div className="ml-4">
+                    <p className="font-semibold">{element.name}</p>
+                    <p className="text-[13px] font-semibold text-blue-300">
+                      {element.type}
+                    </p>
+                  </div>
+                  {/* Price "4000" , Timing:"16:04"ars div */}
+                  <div className="ml-12">
+                    <p>Price</p>
+                    <p className="text-[13px] font-semibold text-blue-300">
+                      {element.Price}
+                    </p>
+                  </div>
+                  <div className="ml-12">
+                    <p>Timing</p>
+                    <p className="text-[13px] font-semibold text-blue-300">
+                      {element.Timing}
+                    </p>
+                  </div>
+                  <button className="px-10 text-[14px] font-semibold py-2 bg-blue-400 border-0 rounded-3xl text-white cursor-pointer ml-12">
+                    Pending
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

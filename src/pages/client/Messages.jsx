@@ -5,13 +5,17 @@ import Vector from "../../assets/Client/Vector.png";
 import pfp from "../../assets/Client/pfp.jpg";
 import { Link } from "react-router-dom";
 const Messages = () => {
+  let [data, setData] = useState("");
   let active = "messages";
-  let array_Lawyers = [
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
+  let messages_array = [
+    { img: pfp, name: "Danish", message: "CivilCriminal", time: "4:09" },
+    { img: pfp, name: "Danish", message: "CivilCriminal", time: "4:09" },
+    { img: pfp, name: "Danish", message: "CivilCriminal", time: "4:09" },
+    { img: pfp, name: "Danish", message: "CivilCriminal", time: "4:09" },
   ];
+  let handleDataCollection = (e) => {
+    console.log(e);
+  };
   return (
     <div className="">
       {/* HEADER */}
@@ -90,9 +94,53 @@ const Messages = () => {
           </button>
         </div>
         {/* ACTION */}
+        {/* border-r-2 border-r-neutral-200 border-t-2 border-t-neutral-200" */}
         <div className="w-[80%] px-10 py-10 flex">
-          <div className="w-2/5 bg-amber-700">sss</div>
-          <div className="w-3/5 bg-teal-400">s</div>
+          <div className="w-2/5 ">
+            <p className="text-2xl font-semibold">Messages</p>
+            <input
+              type="text"
+              className="border-1 rounded-xs border-neutral-200 px-6 py-1.5 mt-6"
+              placeholder="Search For Messages"
+            />
+            <div className="mt-8 flex flex-col gap-4">
+              {messages_array.map((item, index) => (
+                <div
+                  className="flex justify-between items-center w-3/4"
+                  onClick={handleDataCollection}
+                  key={index}
+                >
+                  <img
+                    className="w-17 h-12 rounded-4xl object-center"
+                    src={item.img}
+                    alt=""
+                  />
+                  <div className="w-full pl-4">
+                    <p className="font-semibold">{item.name}</p>
+                    <p className="text-[13px] text-neutral-500">
+                      {item.message}
+                    </p>
+                  </div>
+                  <p className="text-neutral-500">{item.time}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="w-3/5 border-2 border-neutral-200 flex flex-col">
+            {/* <div className="flex justify-between items-center w-3/4">
+              <img
+                className="w-17 h-12 rounded-4xl object-center"
+                src={item.img}
+                alt=""
+              />
+              <div className="w-full pl-4">
+                <p className="font-semibold">{item.name}</p>
+                <p className="text-[13px] text-neutral-500">{item.message}</p>
+              </div>
+              <p className="text-neutral-500">{item.time}</p>
+            </div> */}
+            {/* <div className=" bg-teal-400"></div> */}
+          </div>
         </div>
       </div>
     </div>

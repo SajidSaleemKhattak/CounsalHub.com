@@ -6,11 +6,28 @@ import pfp from "../../assets/Client/pfp.jpg";
 import { Link } from "react-router-dom";
 const Appointments = () => {
   let active = "appointments";
-  let array_Lawyers = [
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
-    { img: pfp, name: "Danish", type: "CivilCriminal", rating: 4 },
+  let array_appoitments = [
+    {
+      img: pfp,
+      name: "Danish",
+      type: "CivilCriminal",
+      Price: 4,
+      Timing: "12:09",
+    },
+    {
+      img: pfp,
+      name: "Danish",
+      type: "CivilCriminal",
+      Price: 4,
+      Timing: "12:09",
+    },
+    {
+      img: pfp,
+      name: "Danish",
+      type: "CivilCriminal",
+      Price: 4,
+      Timing: "12:09",
+    },
   ];
   return (
     <div className="">
@@ -91,7 +108,7 @@ const Appointments = () => {
         </div>
         {/* ACTION */}
         <div className="w-[80%] px-10 py-10">
-          <p className="text-2xl font-semibold">Welcome Back Sajid</p>
+          <p className="text-2xl font-semibold">Appointments</p>
           {/* Container Below Welcome Text */}
           <div className="border-1 border-neutral-200 rounded-2xl py-10 px-10 mt-10">
             {/* Type and Search Button Div  */}
@@ -106,26 +123,39 @@ const Appointments = () => {
               />
             </div>
             {/* Display of list of Lwyers Div */}
-            <div className="flex gap-5">
-              {array_Lawyers.map((element, index) => (
+            <div className="flex gap-5 flex-col">
+              {array_appoitments.map((element, index) => (
                 <div
-                  className="flex flex-col w-[35%] border-1 border-neutral-200 rounded-2xl px-5 py-7 justify-center items-center gap-1"
+                  className="flex w-3/4 h-15 border-1 border-neutral-200 rounded-2xl px-5 py-7 items-center gap-1"
                   key={index}
                 >
                   <img
-                    className="w-[65%] h-2/4 rounded-[500px]"
+                    className="w-12 h-12 rounded-[500px]"
                     src={element.img}
                     alt="lawyers Pfp"
                     srcset=""
                   />
-                  <p className="font-semibold">{element.name}</p>
-                  <p className="text-[13px] font-semibold text-blue-300">
-                    {element.type}
-                  </p>
+                  <div className="ml-4">
+                    <p className="font-semibold">{element.name}</p>
+                    <p className="text-[13px] font-semibold text-blue-300">
+                      {element.type}
+                    </p>
+                  </div>
                   {/* rating stars div */}
-                  <div className="flex"></div>
-                  <button className="px-10 text-[14px] font-semibold py-2 bg-blue-400 border-0 rounded-3xl text-white cursor-pointer">
-                    Book Now
+                  <div className="ml-12">
+                    <p>Price</p>
+                    <p className="text-[13px] font-semibold text-blue-300">
+                      {element.Price}
+                    </p>
+                  </div>
+                  <div className="ml-12">
+                    <p>Timing</p>
+                    <p className="text-[13px] font-semibold text-blue-300">
+                      {element.Timing}
+                    </p>
+                  </div>
+                  <button className="px-10 text-[14px] font-semibold py-2 bg-blue-400 border-0 rounded-3xl text-white cursor-pointer ml-12">
+                    Pending
                   </button>
                 </div>
               ))}

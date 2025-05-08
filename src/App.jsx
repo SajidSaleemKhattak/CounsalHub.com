@@ -9,6 +9,11 @@ import Appointments from "./pages/client/Appointments";
 import Messages from "./pages/client/Messages";
 import Transactions from "./pages/client/Transactions";
 import Profile from "./pages/client/Profile";
+import Lawyer_Check from "./pages/client/Lawyer_Check";
+import Book_appointment from "./pages/client/Book_appointment";
+import Payment_method from "./pages/client/Payment_method";
+import Payment_done_undone from "./pages/client/Payment_done_undone";
+import Reviews from "./pages/client/Reviews";
 import { Routes, Route } from "react-router-dom";
 const App = () => {
   return (
@@ -36,6 +41,23 @@ const App = () => {
           path="/transaction"
           element={<Transactions></Transactions>}
         ></Route>
+        <Route
+          path="/lawyer_check"
+          element={<Lawyer_Check></Lawyer_Check>}
+        ></Route>
+        <Route
+          path="/book_appoitntment"
+          element={<Book_appointment></Book_appointment>}
+        ></Route>
+        <Route
+          path="/payment_method"
+          element={<Payment_method></Payment_method>}
+        ></Route>
+        <Route
+          path="/payment_done_undone"
+          element={<Payment_done_undone></Payment_done_undone>}
+        ></Route>
+        <Route path="/reviews" element={<Reviews></Reviews>}></Route>
       </Routes>
     </div>
   );

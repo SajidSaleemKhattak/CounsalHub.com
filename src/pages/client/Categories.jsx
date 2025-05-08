@@ -124,9 +124,11 @@ const Categories = () => {
                   </p>
                   {/* rating stars div */}
                   <div className="flex"></div>
-                  <button className="px-10 text-[14px] font-semibold py-2 bg-blue-400 border-0 rounded-3xl text-white cursor-pointer">
-                    Book Now
-                  </button>
+                  <Link to="/lawyer_check">
+                    <button className="px-10 text-[14px] font-semibold py-2 bg-blue-400 border-0 rounded-3xl text-white cursor-pointer">
+                      Book Now
+                    </button>
+                  </Link>
                 </div>
               ))}
             </div>
