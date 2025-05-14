@@ -5,13 +5,12 @@ import gear from "../../assets/Client/Gear.png";
 import Vector from "../../assets/Client/Vector.png";
 import pfp from "../../assets/Client/pfp.png";
 import Sidebar from "../../pages/client/components/C-LSidebar";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
-const AppointmentsActive = () => {
+const AppointmentsCompleted = () => {
   let [showNotification, setshowNotification] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleNotification = () => {
     {
@@ -20,22 +19,22 @@ const AppointmentsActive = () => {
   };
   const navigate = useNavigate();
   const location = useLocation();
-  const currentTab = location.pathname.split("/")[2]; // e.g., 'active', 'request', 'completed'
+  const currentTab = location.pathname.split("/")[2]; // active, request, completed
 
-  const appointments = [
+  const completedAppointments = [
     {
       img: pfp,
-      name: "Danish",
-      type: "CivilCriminal",
-      price: 4,
-      timing: "12:09",
+      name: "Ali Khan",
+      type: "Family Law",
+      price: 7,
+      timing: "09:00 AM",
     },
     {
       img: pfp,
-      name: "Sara",
-      type: "Family Law",
-      price: 6,
-      timing: "3:45",
+      name: "Nida Bukhari",
+      type: "Corporate",
+      price: 9,
+      timing: "2:15 PM",
     },
   ];
 
@@ -103,7 +102,7 @@ const AppointmentsActive = () => {
           <img src={gear} className="w-5 h-5" alt="" />
           <div className="flex justify-between gap-1.5">
             <img src={pfp} className="w-7 h-7 rounded-4xl" alt="" />
-            <p className="text-neutral-600 font-semibold">{user.name}</p>
+            <p className="text-neutral-600 font-semibold">Sajid Saleem</p>
           </div>
         </div>
       </div>
@@ -129,21 +128,21 @@ const AppointmentsActive = () => {
             </select>
           </div>
 
-          {/* Appointment List */}
+          {/* Completed Appointments List */}
           <div className="border border-neutral-200 rounded-2xl py-6 px-10 mt-6">
             <div className="flex flex-col gap-5">
-              {appointments.map((item, index) => (
+              {completedAppointments.map((item, index) => (
                 <div
                   key={index}
-                  className="flex justify-around bg-blue-50 border border-neutral-200 rounded-2xl px-5 py-7 items-center"
+                  className="flex justify-between w-full border border-neutral-200 rounded-2xl px-5 py-7 items-center"
                 >
-                  <div className="flex justify-center items-center gap-4">
+                  <div className="flex gap-4 items-center">
                     <img
                       src={item.img}
                       className="w-12 h-12 rounded-full"
                       alt="Lawyer Pfp"
                     />
-                    <div>
+                    <div className="">
                       <p className="font-bold">{item.name}</p>
                       <p className="text-[13px] font-semibold text-[#62B9CB]">
                         {item.type}
@@ -164,12 +163,17 @@ const AppointmentsActive = () => {
                     </p>
                   </div>
                   <div className="">
-                    <button className="px-6 py-2 bg-[#62B9CB] text-white text-[14px] font-semibold rounded-3xl">
-                      Pending
+                    <button className="px-6 py-2 bg-[#62B9CB] text-white text-[14px] font-semibold rounded-3xl cursor-default">
+                      Completed
                     </button>
                   </div>
                 </div>
               ))}
+              {completedAppointments.length === 0 && (
+                <p className="text-gray-500 text-sm">
+                  No completed appointments.
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -178,4 +182,4 @@ const AppointmentsActive = () => {
   );
 };
 
-export default AppointmentsActive;
+export default AppointmentsCompleted;

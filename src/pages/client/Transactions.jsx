@@ -2,121 +2,128 @@ import React, { useState } from "react";
 import logo from "../../assets/home/logo.png";
 import gear from "../../assets/Client/Gear.png";
 import Vector from "../../assets/Client/Vector.png";
-import pfp from "../../assets/Client/pfp.jpg";
+import pfp from "../../assets/Client/pfp.png";
+import Sidebar from "../../pages/client/components/C-LSidebar"; // Sidebar imported
 import { Link } from "react-router-dom";
-import Messages from "./Messages";
-const Transactions = () => {
-  let active = "transaction";
-  let array_transaction = [
+import { IoMdNotificationsOutline } from "react-icons/io";
+
+const Appointments = () => {
+  let [showNotification, setshowNotification] = useState(false);
+
+  const handleNotification = () => {
+    {
+      setshowNotification((toggle) => !toggle);
+    }
+  };
+  let active = "appointments";
+
+  let array_appoitments = [
     {
       img: pfp,
       name: "Danish",
-      type: "CivilCriminal",
-      Price: "4000",
-      Timing: "16:04",
+
+      Price: "Rs.1000/-",
+      Timing: "8PM-9PM",
+      Date: "12 Jan,2024",
     },
     {
       img: pfp,
       name: "Danish",
-      type: "CivilCriminal",
-      Price: "4000",
-      Timing: "16:04",
+
+      Price: "Rs.1000/-",
+      Timing: "8PM-9PM",
+      Date: "12 Jan,2024",
     },
     {
       img: pfp,
       name: "Danish",
-      type: "CivilCriminal",
-      Price: "4000",
-      Timing: "16:04",
-    },
-    {
-      img: pfp,
-      name: "Danish",
-      type: "CivilCriminal",
-      Price: "4000",
-      Timing: "16:04",
+      Price: "Rs.1000/-",
+      Timing: "8PM-9PM",
+      Date: "12 Jan,2024",
     },
   ];
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="">
       {/* HEADER */}
+      {/* HEADER */}
       <div className="flex justify-between mx-20 mt-6">
         <img src={logo} alt="" className="w-[219px] h-[57px]" />
-        <div className="flex justify-between gap-4 items-center">
-          <img src={Vector} className="w-5 h-5" alt="" />
+
+        <div className="flex justify-between relative gap-4 items-center">
+          <img
+            src={Vector}
+            onClick={handleNotification}
+            className="w-5 h-5 hover:scale-120 duration-150 cursor-pointer active:scale-110"
+            alt=""
+          />
+          {showNotification && (
+            <div className="absolute top-12 flex border-[#62B9CB] -left-3 justify-between gap-6 font-semibold z-50 border-2 rounded-xl py-4 pb-7 w-70 flex-col items-center   bg-white text-[#62B9CB]">
+              <div className="flex justify-between px-6 bg-[#62B9CB]  w-full py-4 -mt-[17px] border-0 rounded-t-xl">
+                <div className="text-xl text-white">Notifcations</div>
+                <div className="text-white">
+                  <IoMdNotificationsOutline size={30} />
+                </div>
+              </div>
+
+              <div className="flex gap-4 justify-between items-center w-full px-6 ">
+                <div>
+                  <Link to="/appointments/completed">
+                    <div className="text-lg underline underline-offset-6 hover:text-[black]">
+                      Appointment Approved
+                    </div>
+                  </Link>{" "}
+                </div>
+                <div className="text-lg border-0 rounded-full bg-[#62B9CB] px-3 text-white ">
+                  2
+                </div>
+              </div>
+              <div className="flex gap-4 justify-between items-center w-full px-6 ">
+                <div>
+                  <Link to="/messages">
+                    <div className="text-lg underline underline-offset-6 hover:text-[#62B9CB]">
+                      New Messages
+                    </div>
+                  </Link>{" "}
+                </div>
+                <div className="text-lg border-0 rounded-full bg-[#62B9CB] px-3 text-white">
+                  7
+                </div>
+              </div>
+              <div className="flex gap-4 justify-between items-center w-full px-6">
+                <div>
+                  <Link to="/appointments">
+                    <div className="text-lg underline underline-offset-6 hover:text-[#62B9CB]">
+                      Appointment Pendings
+                    </div>
+                  </Link>{" "}
+                </div>
+                <div className="text-lg border-0 rounded-full bg-[#62B9CB] px-3 text-white">
+                  3
+                </div>
+              </div>
+            </div>
+          )}
+
           <img src={gear} className="w-5 h-5" alt="" />
           <div className="flex justify-between gap-1.5">
             <img src={pfp} className="w-7 h-7 rounded-4xl" alt="" />
-            <p className="text-neutral-600 font-semibold">Sajid Saleem</p>
+            <p className="text-neutral-600 font-semibold">{user.name}</p>
           </div>
         </div>
       </div>
       <hr className="mt-4 text-neutral-200 border-1" />
+
       {/* MAIN */}
       <div className="flex">
         {/* SIDEBAR */}
-        <div className="flex flex-col w-[20%] border-r-1 border-r-neutral-200 h-screen items-center py-5 gap-1">
-          <Link
-            to="/categories"
-            className={`flex gap-3 items-center border-1  border-neutral-200  pr-26 pl-5 py-2 rounded-xl w-4/5 ${
-              active === "home" ? "bg-blue-400 text-white" : ""
-            }`}
-          >
-            <img src={gear} className="w-5 h-5 text-white" alt="" />
-            <button>Home</button>
-          </Link>
-          <Link
-            to="/messages"
-            className={`flex gap-3 items-center border-1  border-neutral-200  pr-26 pl-5 py-2 rounded-xl w-4/5 ${
-              active === "messages" ? "bg-blue-400 text-white" : ""
-            }`}
-          >
-            <img src={gear} className="w-5 h-5" alt="" />
-            <button>Messages</button>
-          </Link>
+        <Sidebar active={active} />
 
-          <Link
-            to="/appointments"
-            className={`flex gap-3 items-center border-1  border-neutral-200  pr-26 pl-5 py-2 rounded-xl w-4/5 ${
-              active === "appointments" ? "bg-blue-400 text-white" : ""
-            }`}
-          >
-            <img src={gear} className="w-5 h-5" alt="" />
-            <button>Appointments</button>
-          </Link>
-          <Link
-            to="/transaction"
-            className={`flex gap-3 items-center border-1  border-neutral-200  pr-26 pl-5 py-2 rounded-xl w-4/5 ${
-              active === "transaction" ? "bg-blue-400 text-white" : ""
-            }`}
-          >
-            <img src={gear} className="w-5 h-5" alt="" />
-            <button>Transactions</button>
-          </Link>
-          <Link
-            to="/profile"
-            className={`flex gap-3 items-center border-1 border-neutral-200 pr-26 pl-5 py-2 rounded-xl w-4/5 ${
-              active === "profile" ? "bg-blue-400 text-white" : ""
-            }`}
-          >
-            <img src={gear} className="w-5 h-5" alt="" />
-            <button>Profile</button>
-          </Link>
-          <div className="flex flex-col justify-center items-center bg-blue-400 w-4/5 rounded-2xl px-6 py-6 text-white mt-14">
-            <p className="font-semibold">Help Center</p>
-            <p className="mt-2 text-[13px]">Contact us for More </p>
-            <p className="text-[13px]">Questions</p>
-            <button className="bg-white text-blue-400 px-2 py-2 rounded-xl mt-2 font-semibold w-full text-[13px] cursor-alias">
-              Go To Help Center
-            </button>
-          </div>
-          <button className=" bg-blue-400 text-white w-4/5  px-2 py-2 rounded-xl mt-8 cursor-pointer">
-            Logout
-          </button>
-        </div>
         {/* ACTION */}
         <div className="w-[80%] px-10 py-10">
-          <p className="text-2xl font-semibold">Appointments</p>
+          <p className="text-2xl font-semibold">Transactions</p>
+
           {/* Container Below Welcome Text */}
           <div className="border-1 border-neutral-200 rounded-2xl py-10 px-10 mt-10">
             {/* Type and Search Button Div  */}
@@ -125,46 +132,61 @@ const Transactions = () => {
               <input
                 className="border-1 border-neutral-200 rounded-xl px-6 py-2"
                 type="search"
-                name=""
                 placeholder="Search for Category"
-                id=""
               />
             </div>
-            {/* Display of list of Lwyers Div */}
-            <div className="flex gap-5 flex-col">
-              {array_transaction.map((element, index) => (
+
+            {/* Display of list of Lawyers Div */}
+            <div className="flex flex-col gap-5 mb-10">
+              {/* Table Headings */}
+              <div className="flex -center px-5 bg-gray-100 py-4 font-semibold text-[15px] ">
+                <div className="w-[20%]">Lawyer</div>
+                <div className="w-[15%] ">Selected Time</div>
+                <div className="w-[15%]">Date</div>
+                <div className="w-[15%]">Amount</div>
+                <div className="w-[20%] text-center">Status</div>
+              </div>
+
+              {/* Table Rows */}
+              {array_appoitments.map((element, index) => (
                 <div
-                  className="flex w-3/4 h-15 border-1 border-neutral-200 rounded-2xl px-5 py-7 items-center gap-1"
                   key={index}
+                  className="flex  items-center px-5 py-5 border-b-2 border-neutral-200"
                 >
-                  <img
-                    className="w-12 h-12 rounded-[500px]"
-                    src={element.img}
-                    alt="lawyers Pfp"
-                    srcset=""
-                  />
-                  <div className="ml-4">
-                    <p className="font-semibold">{element.name}</p>
-                    <p className="text-[13px] font-semibold text-blue-300">
-                      {element.type}
-                    </p>
+                  <div className="w-[20%] flex items-center gap-3">
+                    <img
+                      className="w-12 h-12 rounded-full"
+                      src={element.img}
+                      alt="Lawyer Pfp"
+                    />
+                    <div>
+                      <p className="font-semibold">{element.name}</p>
+                    </div>
                   </div>
-                  {/* Price "4000" , Timing:"16:04"ars div */}
-                  <div className="ml-12">
-                    <p>Price</p>
-                    <p className="text-[13px] font-semibold text-blue-300">
-                      {element.Price}
-                    </p>
-                  </div>
-                  <div className="ml-12">
-                    <p>Timing</p>
-                    <p className="text-[13px] font-semibold text-blue-300">
+
+                  <div className="w-[15%]">
+                    <p className="text-[13px] font-semibold text-[#62B9CB]">
                       {element.Timing}
                     </p>
                   </div>
-                  <button className="px-10 text-[14px] font-semibold py-2 bg-blue-400 border-0 rounded-3xl text-white cursor-pointer ml-12">
-                    Pending
-                  </button>
+
+                  <div className="w-[15%]">
+                    <p className="text-[13px] font-semibold text-[#62B9CB]">
+                      {element.Date || "—"}
+                    </p>
+                  </div>
+
+                  <div className="w-[15%]">
+                    <p className="text-[13px] font-semibold text-[#62B9CB]">
+                      {element.Price}
+                    </p>
+                  </div>
+
+                  <div className="w-[20%] text-center">
+                    <button className="px-8 py-2 text-sm font-semibold bg-[#62B9CB] text-white rounded-md">
+                      PAID
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -175,4 +197,4 @@ const Transactions = () => {
   );
 };
 
-export default Transactions;
+export default Appointments;

@@ -2,9 +2,23 @@ import React, { useState } from "react";
 import logo from "../../assets/home/logo.png";
 import gear from "../../assets/Client/Gear.png";
 import Vector from "../../assets/Client/Vector.png";
-import pfp from "../../assets/Client/pfp.jpg";
+import pfp from "../../assets/Client/pfp.png";
 import { Link } from "react-router-dom";
 const Lawyer_Check = () => {
+  const user = JSON.parse(localStorage.getItem("user")) || { name: "Guest" };
+  const handleBookNow = async (lawyerId, userName, userEmail) => {
+    try {
+      await axios.post("http://localhost:5000/api/bookings", {
+        lawyerId,
+        userName,
+        userEmail,
+      });
+      alert("Booking request sent to the lawyer!");
+    } catch (err) {
+      console.error("Booking failed:", err);
+      alert("Booking failed. Please try again.");
+    }
+  };
   let active = "home";
   let cuurent_appointments = [
     {
@@ -55,7 +69,7 @@ const Lawyer_Check = () => {
           <img src={gear} className="w-5 h-5" alt="" />
           <div className="flex justify-between gap-1.5">
             <img src={pfp} className="w-7 h-7 rounded-4xl" alt="" />
-            <p className="text-neutral-600 font-semibold">Sajid Saleem</p>
+            <p className="text-neutral-600 font-semibold">{user.name}</p>
           </div>
         </div>
       </div>
@@ -110,7 +124,7 @@ const Lawyer_Check = () => {
             <img src={gear} className="w-5 h-5" alt="" />
             <button>Profile</button>
           </Link>
-          <div className="flex flex-col justify-center items-center bg-blue-400 w-4/5 rounded-2xl px-6 py-6 text-white mt-14">
+          <div className="flex flex-col justify-center items-center bg-amber-400 w-4/5 rounded-2xl px-6 py-6 text-white mt-14">
             <p className="font-semibold">Help Center</p>
             <p className="mt-2 text-[13px]">Contact us for More </p>
             <p className="text-[13px]">Questions</p>
@@ -164,15 +178,7 @@ const Lawyer_Check = () => {
             <div className="flex flex-col w-fit border-1 border-neutral-200 rounded-2xl px-4 py-4">
               <div>
                 <p className="text-xl font-semibold">Biography</p>
-                <p className="text-[16px] text-neutral-500">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-                  cum dolor error officiis illo soluta eius culpa qui. Quis
-                  consectetur ut ea velit, molestiae reprehenderit maxime
-                  perspiciatis veritatis ipsum necessitatibus placeat. Quas
-                  ducimus quisquam cupiditate voluptate placeat quod asperiores
-                  natus minus. Omnis fugiat molestias corporis temporibus quidem
-                  doloribus quaerat voluptate!
-                </p>
+                <p className="text-[16px] text-neutral-500"></p>
               </div>
               <div>
                 <div className="border-1 border-neutral-200 rounded-2xl px-4 py-4 mt-4">
@@ -212,8 +218,8 @@ const Lawyer_Check = () => {
                       Back
                     </button>
                   </Link>
-                  <Link to="/book_appoitntment">
-                    <button className="px-10 py-2 bg-blue-400 border-0 rounded-3xl text-white">
+                  <Link to="/Contact">
+                    <button className="bg-[#62B9CB] text-white px-4 py-2 rounded-xl">
                       Book Now
                     </button>
                   </Link>

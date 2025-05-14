@@ -1,32 +1,40 @@
 import React, { useState } from "react";
-import logo from "../../assets/home/logo.png";
-import gear from "../../assets/Client/Gear.png";
-import Vector from "../../assets/Client/Vector.png";
-import pfp from "../../assets/Client/pfp.png";
-import Sidebar from "../../pages/client/components/C-LSidebar"; //  Sidebar imported
-import { Link } from "react-router-dom";
-import { VscSend } from "react-icons/vsc";
+import logo from "./../../assets/home/logo.png";
+import gear from "./../../assets/Client/Gear.png";
+import Vector from "./../../assets/Client/Vector.png";
+import pfp from "./../../assets/Client/pfp.png";
+import LSideBar from "./components/L-sidebar.jsx";
+import { FaPaperPlane } from "react-icons/fa";
+import { IoCallOutline } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { Link } from "react-router-dom";
 
-const Messages = () => {
+const LawyerMessages = () => {
   let [showNotification, setshowNotification] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleNotification = () => {
     {
       setshowNotification((toggle) => !toggle);
     }
   };
-  const [data, setData] = useState("");
-  const active = "messages";
-
-  const messages_array = [
-    { img: pfp, name: "sajidSaleem", message: "CivilCriminal", time: "4:09" },
+  let active = "messages";
+  let messages_array = [
+    { img: pfp, name: "John Doe", message: "CivilCriminal", time: "4:09" },
+    { img: pfp, name: "Jane Smith", message: "Family Law", time: "5:15" },
+    {
+      img: pfp,
+      name: "Michael Black",
+      message: "Criminal Defense",
+      time: "6:20",
+    },
+    { img: pfp, name: "Sarah White", message: "Corporate Law", time: "7:45" },
   ];
 
   const handleDataCollection = (e) => {
     console.log(e);
   };
-  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* HEADER */}
@@ -51,9 +59,9 @@ const Messages = () => {
 
               <div className="flex gap-4 justify-between items-center w-full px-6 ">
                 <div>
-                  <Link to="/appointments/completed">
+                  <Link to="/lawyerappointments/request">
                     <div className="text-lg underline underline-offset-6 hover:text-[black]">
-                      Appointment Approved
+                      Appointment Requests
                     </div>
                   </Link>{" "}
                 </div>
@@ -63,7 +71,7 @@ const Messages = () => {
               </div>
               <div className="flex gap-4 justify-between items-center w-full px-6 ">
                 <div>
-                  <Link to="/messages">
+                  <Link to="/lawyermessages">
                     <div className="text-lg underline underline-offset-6 hover:text-[#62B9CB]">
                       New Messages
                     </div>
@@ -75,7 +83,7 @@ const Messages = () => {
               </div>
               <div className="flex gap-4 justify-between items-center w-full px-6">
                 <div>
-                  <Link to="/appointments">
+                  <Link to="/lawyerappointments/active">
                     <div className="text-lg underline underline-offset-6 hover:text-[#62B9CB]">
                       Appointment Pendings
                     </div>
@@ -95,16 +103,16 @@ const Messages = () => {
           </div>
         </div>
       </div>
-      <hr className="mt-4 text-neutral-200 border-1" />
 
-      {/* MAIN CONTENT */}
+      <hr className="border-1 border-gray-200 mt-3" />
+
+      {/* MAIN BODY */}
       <div className="flex flex-grow overflow-hidden">
-        {/* SIDEBAR */}
-        <Sidebar active={active} />
+        <LSideBar active={active} />
 
-        {/* MAIN CONTENT AREA */}
-        <div className="w-[80%] flex px-6 py-4 gap-6">
-          {/* LEFT: Messages List */}
+        {/* MAIN CONTENT */}
+        <div className="w-full flex px-6 py-4 gap-6">
+          {/* LEFT - MESSAGES LIST */}
           <div className="w-2/5 flex flex-col">
             <p className="text-2xl font-semibold mb-6">Messages</p>
             <input
@@ -120,7 +128,7 @@ const Messages = () => {
                   className="flex justify-between items-center w-3/4 cursor-pointer"
                 >
                   <img
-                    className="w-12 h-10 rounded-[800px] object-center"
+                    className="w-12 h-12 rounded-full object-center"
                     src={item.img}
                     alt={item.name}
                   />
@@ -134,34 +142,40 @@ const Messages = () => {
             </div>
           </div>
 
-          {/* RIGHT: Chat Box */}
-          <div className="w-3/5 flex flex-col border border-gray-200 rounded-xl overflow-hidden">
-            {/* Chat Header */}
-            <div className="flex items-center px-6 py-4 border-b border-gray-200">
-              <img src={pfp} alt="profile" className="w-10 h-10 rounded-full" />
-              <div className="ml-4">
-                <p className="font-semibold text-gray-800">Danish</p>
-                <p className="text-sm text-gray-400">CivilCriminal</p>
+          {/* RIGHT - CHAT WINDOW */}
+          <div className="w-3/5 flex flex-col justify-between border border-gray-300 rounded-xl overflow-hidden">
+            {/* HEADER of chat */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <div className="flex items-center">
+                <img
+                  className="w-12 h-12 rounded-full object-center"
+                  src={pfp}
+                  alt="Profile"
+                />
+                <div className="ml-4">
+                  <p className="font-semibold">Alex Johnson</p>
+                  <p className="text-sm text-neutral-500">Contract Law</p>
+                </div>
               </div>
+              <IoCallOutline className="text-xl" />
             </div>
 
-            {/* Chat Messages */}
-            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-white">
-              <div className="self-start bg-gray-100 text-gray-700 px-4 py-2 rounded-xl max-w-[75%]">
-                Email Sent
-              </div>
+            {/* Message area (can fill later) */}
+            <div className="flex-grow px-4 py-2 overflow-auto">
+              {/* Chat messages would go here */}
             </div>
 
-            {/* Input Field */}
-            <div className="border-t border-gray-200 p-4 flex items-center gap-4">
+            {/* Input */}
+            <div className="flex items-center gap-3 p-4 border-t border-gray-200">
               <input
                 type="text"
-                placeholder="Type your message..."
-                className="flex-1 border border-gray-300 rounded-xl px-4 py-2 focus:outline-none"
+                className="border border-neutral-300 rounded px-4 py-2 w-full"
+                placeholder="Type your message"
               />
-              <button className="bg-[#62B9CB] text-white px-4 py-2 rounded-xl font-semibold hover:bg-[#51a4b7] transition">
-                <VscSend />
-              </button>
+              <div className="bg-[#62B9CB] py-2 rounded-sm flex px-2 ">
+                <input type="file" className="cursor-pointer" />
+              </div>
+              <FaPaperPlane className="text-[#62B9CB] text-2xl cursor-pointer" />
             </div>
           </div>
         </div>
@@ -170,4 +184,4 @@ const Messages = () => {
   );
 };
 
-export default Messages;
+export default LawyerMessages;

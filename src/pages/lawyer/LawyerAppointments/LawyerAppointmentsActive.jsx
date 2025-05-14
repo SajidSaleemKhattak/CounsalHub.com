@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "../../assets/home/logo.png";
-import gear from "../../assets/Client/Gear.png";
-import Vector from "../../assets/Client/Vector.png";
-import pfp from "../../assets/Client/pfp.png";
-import Sidebar from "../../pages/client/components/C-LSidebar";
+import logo from "../../../assets/home/logo.png";
+import gear from "../../../assets/Client/Gear.png";
+import Vector from "../../../assets/Client/Vector.png";
+import pfp from "../../../assets/Client/pfp.png";
+import LSideBar from "../components/L-sidebar.jsx";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const AppointmentsActive = () => {
+const LawyerAppointmentsActive = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentTab = location.pathname.split("/")[2]; // 'active', 'request', 'completed'
+
+  const array_appointments = [
+    {
+      img: pfp,
+      name: "Client A",
+      type: "Civil",
+      Price: 5,
+      Timing: "10:00",
+    },
+    {
+      img: pfp,
+      name: "Client B",
+      type: "Criminal",
+      Price: 6,
+      Timing: "11:30",
+    },
+  ];
   let [showNotification, setshowNotification] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -18,27 +37,6 @@ const AppointmentsActive = () => {
       setshowNotification((toggle) => !toggle);
     }
   };
-  const navigate = useNavigate();
-  const location = useLocation();
-  const currentTab = location.pathname.split("/")[2]; // e.g., 'active', 'request', 'completed'
-
-  const appointments = [
-    {
-      img: pfp,
-      name: "Danish",
-      type: "CivilCriminal",
-      price: 4,
-      timing: "12:09",
-    },
-    {
-      img: pfp,
-      name: "Sara",
-      type: "Family Law",
-      price: 6,
-      timing: "3:45",
-    },
-  ];
-
   return (
     <div>
       {/* HEADER */}
@@ -63,9 +61,9 @@ const AppointmentsActive = () => {
 
               <div className="flex gap-4 justify-between items-center w-full px-6 ">
                 <div>
-                  <Link to="/appointments/completed">
+                  <Link to="/lawyerappointments/request">
                     <div className="text-lg underline underline-offset-6 hover:text-[black]">
-                      Appointment Approved
+                      Appointment Requests
                     </div>
                   </Link>{" "}
                 </div>
@@ -75,7 +73,7 @@ const AppointmentsActive = () => {
               </div>
               <div className="flex gap-4 justify-between items-center w-full px-6 ">
                 <div>
-                  <Link to="/messages">
+                  <Link to="/lawyermessages">
                     <div className="text-lg underline underline-offset-6 hover:text-[#62B9CB]">
                       New Messages
                     </div>
@@ -87,7 +85,7 @@ const AppointmentsActive = () => {
               </div>
               <div className="flex gap-4 justify-between items-center w-full px-6">
                 <div>
-                  <Link to="/appointments">
+                  <Link to="/lawyerappointments/active">
                     <div className="text-lg underline underline-offset-6 hover:text-[#62B9CB]">
                       Appointment Pendings
                     </div>
@@ -107,64 +105,69 @@ const AppointmentsActive = () => {
           </div>
         </div>
       </div>
-      <hr className="mt-4 border border-neutral-200" />
 
-      {/* MAIN CONTENT */}
+      <hr className="border-1 border-gray-200 mt-3" />
+
+      {/* MAIN */}
       <div className="flex">
         {/* SIDEBAR */}
-        <Sidebar active="appointments" />
+        <LSideBar />
 
         {/* ACTION AREA */}
-        <div className="w-[80%] px-10 py-10">
+        <div className="w-[80%] px-4 py-3">
           <div className="flex justify-between items-center">
             <p className="text-2xl font-semibold">Appointments</p>
             <select
               value={currentTab}
-              onChange={(e) => navigate(`/appointments/${e.target.value}`)}
-              className="bg-neutral-200 text-black px-3 py-2 rounded-xl text-sm font-medium"
+              onChange={(e) =>
+                navigate(`/lawyerappointments/${e.target.value}`)
+              }
+              className="bg-neutral-200 text-black px-3 py-2  rounded-xl text-sm font-medium"
             >
               <option value="active">Active</option>
-
+              <option value="request">Requests</option>
               <option value="completed">Completed</option>
             </select>
           </div>
 
-          {/* Appointment List */}
-          <div className="border border-neutral-200 rounded-2xl py-6 px-10 mt-6">
+          {/* Clients List */}
+          <div className="border-1 border-neutral-200 rounded-2xl py-6 px-10 mt-4">
             <div className="flex flex-col gap-5">
-              {appointments.map((item, index) => (
+              {array_appointments.map((element, index) => (
                 <div
+                  className="flex border-1 border-neutral-200 rounded-2xl px-5 py-12 items-center justify-around gap-1"
                   key={index}
-                  className="flex justify-around bg-blue-50 border border-neutral-200 rounded-2xl px-5 py-7 items-center"
                 >
-                  <div className="flex justify-center items-center gap-4">
-                    <img
-                      src={item.img}
-                      className="w-12 h-12 rounded-full"
-                      alt="Lawyer Pfp"
-                    />
-                    <div>
-                      <p className="font-bold">{item.name}</p>
-                      <p className="text-[13px] font-semibold text-[#62B9CB]">
-                        {item.type}
-                      </p>
-                    </div>
+                  <img
+                    className="w-12 h-12 rounded-full"
+                    src={element.img}
+                    alt="client profile"
+                  />
+                  <div className="ml-4">
+                    <p className="font-semibold">{element.name}</p>
+                    <p className="text-[13px] font-semibold  text-[#62B9CB]">
+                      Customer
+                    </p>
+                  </div>
+                  <div>
+                    <div className="font-bold text-center">Category</div>
+                    <div className="text-center">{element.type}</div>
                   </div>
 
                   <div className="">
                     <p className="font-bold">Price</p>
                     <p className="text-[13px] font-semibold text-[#62B9CB]">
-                      ${item.price}
+                      ${element.Price}
                     </p>
                   </div>
                   <div className="">
                     <p className="font-bold">Time</p>
                     <p className="text-[13px] font-semibold text-[#62B9CB]">
-                      {item.timing}
+                      {element.Timing}
                     </p>
                   </div>
-                  <div className="">
-                    <button className="px-6 py-2 bg-[#62B9CB] text-white text-[14px] font-semibold rounded-3xl">
+                  <div className=" flex ">
+                    <button className="px-6 text-[14px] font-semibold py-2 bg-[#62B9CB] border-0 rounded-3xl text-white cursor-pointer">
                       Pending
                     </button>
                   </div>
@@ -178,4 +181,4 @@ const AppointmentsActive = () => {
   );
 };
 
-export default AppointmentsActive;
+export default LawyerAppointmentsActive;

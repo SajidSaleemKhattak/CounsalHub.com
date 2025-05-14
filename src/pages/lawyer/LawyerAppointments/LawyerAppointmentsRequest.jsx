@@ -1,43 +1,56 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "../../assets/home/logo.png";
-import gear from "../../assets/Client/Gear.png";
-import Vector from "../../assets/Client/Vector.png";
-import pfp from "../../assets/Client/pfp.png";
-import Sidebar from "../../pages/client/components/C-LSidebar";
+import logo from "../../../assets/home/logo.png";
+import gear from "../../../assets/Client/Gear.png";
+import Vector from "../../../assets/Client/Vector.png";
+import pfp from "../../../assets/Client/pfp.png";
+import LSideBar from "../components/L-sidebar.jsx";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const AppointmentsActive = () => {
+const LawyerAppointmentsRequest = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentTab = location.pathname.split("/")[2];
+
+  const array_appointments = [
+    {
+      img: pfp,
+      name: "Client A",
+      type: "Civil",
+      Price: 5000,
+      Timing: "10:00",
+    },
+    {
+      img: pfp,
+      name: "Client B",
+      type: "Criminal",
+      Price: 6000,
+      Timing: "11:30",
+    },
+    {
+      img: pfp,
+      name: "Client C",
+      type: "Family",
+      Price: 7000,
+      Timing: "13:45",
+    },
+    {
+      img: pfp,
+      name: "Client D",
+      type: "Corporate",
+      Price: 8000,
+      Timing: "15:00",
+    },
+  ];
   let [showNotification, setshowNotification] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleNotification = () => {
     {
       setshowNotification((toggle) => !toggle);
     }
   };
-  const navigate = useNavigate();
-  const location = useLocation();
-  const currentTab = location.pathname.split("/")[2]; // e.g., 'active', 'request', 'completed'
-
-  const appointments = [
-    {
-      img: pfp,
-      name: "Danish",
-      type: "CivilCriminal",
-      price: 4,
-      timing: "12:09",
-    },
-    {
-      img: pfp,
-      name: "Sara",
-      type: "Family Law",
-      price: 6,
-      timing: "3:45",
-    },
-  ];
 
   return (
     <div>
@@ -63,9 +76,9 @@ const AppointmentsActive = () => {
 
               <div className="flex gap-4 justify-between items-center w-full px-6 ">
                 <div>
-                  <Link to="/appointments/completed">
+                  <Link to="/lawyerappointments/request">
                     <div className="text-lg underline underline-offset-6 hover:text-[black]">
-                      Appointment Approved
+                      Appointment Requests
                     </div>
                   </Link>{" "}
                 </div>
@@ -75,7 +88,7 @@ const AppointmentsActive = () => {
               </div>
               <div className="flex gap-4 justify-between items-center w-full px-6 ">
                 <div>
-                  <Link to="/messages">
+                  <Link to="/lawyermessages">
                     <div className="text-lg underline underline-offset-6 hover:text-[#62B9CB]">
                       New Messages
                     </div>
@@ -87,7 +100,7 @@ const AppointmentsActive = () => {
               </div>
               <div className="flex gap-4 justify-between items-center w-full px-6">
                 <div>
-                  <Link to="/appointments">
+                  <Link to="/lawyerappointments/active">
                     <div className="text-lg underline underline-offset-6 hover:text-[#62B9CB]">
                       Appointment Pendings
                     </div>
@@ -103,70 +116,74 @@ const AppointmentsActive = () => {
           <img src={gear} className="w-5 h-5" alt="" />
           <div className="flex justify-between gap-1.5">
             <img src={pfp} className="w-7 h-7 rounded-4xl" alt="" />
-            <p className="text-neutral-600 font-semibold">{user.name}</p>
+            <p className="text-neutral-600 font-semibold">Sajid Saleem</p>
           </div>
         </div>
       </div>
-      <hr className="mt-4 border border-neutral-200" />
 
-      {/* MAIN CONTENT */}
+      <hr className="border-1 border-gray-200 mt-3" />
+
+      {/* MAIN */}
       <div className="flex">
         {/* SIDEBAR */}
-        <Sidebar active="appointments" />
+        <LSideBar active="appointments" />
 
         {/* ACTION AREA */}
-        <div className="w-[80%] px-10 py-10">
+        <div className="w-[80%] px-4 py-3">
           <div className="flex justify-between items-center">
             <p className="text-2xl font-semibold">Appointments</p>
             <select
               value={currentTab}
-              onChange={(e) => navigate(`/appointments/${e.target.value}`)}
+              onChange={(e) =>
+                navigate(`/lawyerappointments/${e.target.value}`)
+              }
               className="bg-neutral-200 text-black px-3 py-2 rounded-xl text-sm font-medium"
             >
               <option value="active">Active</option>
-
+              <option value="request">Requests</option>
               <option value="completed">Completed</option>
             </select>
           </div>
 
-          {/* Appointment List */}
-          <div className="border border-neutral-200 rounded-2xl py-6 px-10 mt-6">
-            <div className="flex flex-col gap-5">
-              {appointments.map((item, index) => (
+          {/* Clients List */}
+          <div className="border border-neutral-200 rounded-2xl py-10 px-10 mt-10">
+            <div className="grid grid-cols-2 gap-6">
+              {array_appointments.map((element, index) => (
                 <div
                   key={index}
-                  className="flex justify-around bg-blue-50 border border-neutral-200 rounded-2xl px-5 py-7 items-center"
+                  className="flex flex-col border border-neutral-200 rounded-2xl px-5 py-6"
                 >
-                  <div className="flex justify-center items-center gap-4">
+                  <div className="flex gap-3 items-start">
                     <img
-                      src={item.img}
+                      src={element.img}
+                      alt="client"
                       className="w-12 h-12 rounded-full"
-                      alt="Lawyer Pfp"
                     />
-                    <div>
-                      <p className="font-bold">{item.name}</p>
-                      <p className="text-[13px] font-semibold text-[#62B9CB]">
-                        {item.type}
-                      </p>
-                    </div>
-                  </div>
 
-                  <div className="">
-                    <p className="font-bold">Price</p>
-                    <p className="text-[13px] font-semibold text-[#62B9CB]">
-                      ${item.price}
-                    </p>
-                  </div>
-                  <div className="">
-                    <p className="font-bold">Time</p>
-                    <p className="text-[13px] font-semibold text-[#62B9CB]">
-                      {item.timing}
-                    </p>
-                  </div>
-                  <div className="">
-                    <button className="px-6 py-2 bg-[#62B9CB] text-white text-[14px] font-semibold rounded-3xl">
-                      Pending
-                    </button>
+                    <div>
+                      <p className="font-semibold">{element.name}</p>
+
+                      <div className="flex items-center gap-6 text-[#62B9CB] mt-2">
+                        <p>Time</p>
+                        <p className="text-sm font-semibold">
+                          {element.Timing}
+                        </p>
+                      </div>
+                      <div className="flex items-center text-{#62B9CB} gap-6 mt-1">
+                        <p className="text-[#62B9CB]">Amount</p>
+                        <p className="text-sm font-semibold text-#62B9CB]">
+                          Rs. {element.Price}
+                        </p>
+                      </div>
+                      <div className="flex -ml-16 mt-6 gap-2">
+                        <button className="px-6 py-2 border-2 border-gray-400 text-sm font-semibold rounded-lg text-black">
+                          Decline Appointment
+                        </button>
+                        <button className="px-6 py-2 bg-[#62B9CB] text-white text-sm font-semibold rounded-lg">
+                          Accept Appointment
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -178,4 +195,4 @@ const AppointmentsActive = () => {
   );
 };
 
-export default AppointmentsActive;
+export default LawyerAppointmentsRequest;

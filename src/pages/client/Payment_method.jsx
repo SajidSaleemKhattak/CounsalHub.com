@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../../assets/home/logo.png";
 import gear from "../../assets/Client/Gear.png";
 import Vector from "../../assets/Client/Vector.png";
-import pfp from "../../assets/Client/pfp.jpg";
+import pfp from "../../assets/Client/pfp.png";
 import { Link } from "react-router-dom";
 const Payment_method = () => {
   let active = "home";

@@ -5,51 +5,53 @@ import { Link } from "react-router-dom";
 
 const Additional = () => {
   return (
-    <div className="grid grid-cols-2 relative">
-      <div className="w-80% bg-amber-200 mt-10 mx-10 ">
-        <div className="flex justify-between bg-sky-400 ">
-          <img src={logo} className="w-[219px] h-[57px]" alt="" />
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+      {/* Left Section */}
+      <div className="flex flex-col px-6 md:px-10 py-8 justify-top bg-white">
+        <div className="flex flex-col gap-6 w-screen md:flex-row md:gap-2 md:w-full justify-between items-center mb-6">
+          <img src={logo} className="w-40 md:w-[219px] h-auto" alt="logo" />
           <Link to="/">
-            <button className="px-8 py-2 bg-blue-400 border-0 rounded-3xl text-white">
+            <button className="px-6 py-2 text-sm md:text-base bg-[#62B9CB] rounded-3xl text-white">
               Back to Website
             </button>
           </Link>
         </div>
-        <div className="flex flex-col items-center justify-center gap-6 ">
-          <p className="text-2xl">Additional Information</p>
+
+        <div className="flex flex-col items-center gap-5 -ml-4 w-screen md:ml-0 md:w-full">
+          <p className="text-xl md:text-2xl font-semibold text-center text-[#62B9CB]">
+            Additional Information
+          </p>
+
           <input
-            className="border-1 rounded-xl px-6 py-2"
+            className="border border-gray-300 rounded-xl px-4 py-2 w-full max-w-md"
             type="text"
-            name=""
-            id=""
             placeholder="Select Your Country"
           />
           <input
-            className="border-1 rounded-xl px-6 py-2"
+            className="border border-gray-300 rounded-xl px-4 py-2 w-full max-w-md"
             type="text"
-            name=""
-            id=""
             placeholder="Enter Your Phone Number"
           />
-          <input
-            className="border-1 rounded-xl px-6 py-2"
-            type="text-area"
-            name=""
-            id=""
+          <textarea
+            className="border border-gray-300 rounded-xl px-4 py-2 w-full max-w-md resize-none"
+            rows="4"
             placeholder="Your Bio"
-          />
-          <Link to="/categories">
-            <button className="px-24 py-2 font-bold bg-blue-400 border-0 rounded-3xl text-white">
+          ></textarea>
+
+          <Link to="/categories" className="w-full max-w-md">
+            <button className="w-full py-2 font-bold bg-[#62B9CB] rounded-3xl text-white">
               Signup
             </button>
           </Link>
         </div>
       </div>
-      <div className="bg-violet-200 w-[35%]">
+
+      {/* Right Section */}
+      <div className="hidden md:block bg-violet-200 h-full">
         <img
           src={tarazoImg}
-          className=" h-screen w-[35%] absolute top-0 right-0"
-          alt=""
+          className="w-full h-full object-cover"
+          alt="Tarazo"
         />
       </div>
     </div>

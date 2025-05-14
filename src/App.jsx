@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Client_Signup from "./pages/client/Client_Signup";
-import Categories from "./pages/client/categories";
+import Categories from "./pages/client/Categories";
 import Addtional from "./pages/client/Additional";
 import Appointments from "./pages/client/Appointments";
 import Messages from "./pages/client/Messages";
@@ -15,6 +15,19 @@ import Payment_method from "./pages/client/Payment_method";
 import Payment_done_undone from "./pages/client/Payment_done_undone";
 import Reviews from "./pages/client/Reviews";
 import { Routes, Route } from "react-router-dom";
+import LawyerProfileUpdate1 from "./pages/lawyer/LawyerProfileUpdate/LawyerProfileUpdate1";
+import LawyerProfileUpdate2 from "./pages/lawyer/LawyerProfileUpdate/LawyerProfileUpdate2";
+import LawyerProfile from "./pages/lawyer/LawyerProfile";
+import LawyerMessages from "./pages/lawyer/LawyerMessages";
+import LawyerEarnings from "./pages/lawyer/LawyerEarnings";
+import Law from "./pages/lawyer/Law";
+import LawyersDashboard from "./pages/lawyer/LawyersDashboard";
+import LawyerAppointmentsActive from "./pages/lawyer/LawyerAppointments/LawyerAppointmentsActive";
+import LawyerAppointmentsRequest from "./pages/lawyer/LawyerAppointments/LawyerAppointmentsRequest";
+import LawyerAppointmentsCompleted from "./pages/lawyer/LawyerAppointments/LawyerAppointmentsCompleted";
+import AppointmentsCompleted from "./pages/client/AppointmentsCompleted";
+import AppointmentsActive from "./pages/client/Appointments";
+import Contact from "./pages/client/Contact";
 const App = () => {
   return (
     <div>
@@ -37,10 +50,7 @@ const App = () => {
           element={<Appointments></Appointments>}
         ></Route>
         <Route path="/profile" element={<Profile></Profile>}></Route>
-        <Route
-          path="/transaction"
-          element={<Transactions></Transactions>}
-        ></Route>
+        <Route path="/transaction" element={<Transactions />}></Route>
         <Route
           path="/lawyer_check"
           element={<Lawyer_Check></Lawyer_Check>}
@@ -49,6 +59,15 @@ const App = () => {
           path="/book_appoitntment"
           element={<Book_appointment></Book_appointment>}
         ></Route>
+
+        {/* Client Appointments */}
+        <Route path="/appointments/active" element={<AppointmentsActive />} />
+
+        <Route
+          path="/appointments/completed"
+          element={<AppointmentsCompleted />}
+        />
+
         <Route
           path="/payment_method"
           element={<Payment_method></Payment_method>}
@@ -58,6 +77,33 @@ const App = () => {
           element={<Payment_done_undone></Payment_done_undone>}
         ></Route>
         <Route path="/reviews" element={<Reviews></Reviews>}></Route>
+
+        <Route
+          path="/lawyerprofileUpdate1"
+          element={<LawyerProfileUpdate1 />}
+        />
+        <Route
+          path="/lawyerprofileupdate2"
+          element={<LawyerProfileUpdate2 />}
+        />
+        <Route path="/lawyerprofile" element={<LawyerProfile />} />
+        <Route path="/lawyermessages" element={<LawyerMessages />} />
+        <Route path="/lawyerearnings" element={<LawyerEarnings />} />
+        <Route path="/law" element={<Law />} />
+        <Route path="/lawyerdashboard" element={<LawyersDashboard />} />
+        <Route
+          path="/lawyerappointments/active"
+          element={<LawyerAppointmentsActive />}
+        />
+        <Route
+          path="/lawyerappointments/request"
+          element={<LawyerAppointmentsRequest />}
+        />
+        <Route
+          path="/lawyerappointments/completed"
+          element={<LawyerAppointmentsCompleted />}
+        />
+        <Route path="/Contact" element={<Contact />} />
       </Routes>
     </div>
   );
